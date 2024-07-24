@@ -9,6 +9,13 @@
             </div>
         </div>
         @endif
+        @if(session('error'))
+        <div class="flex justify-center">
+            <div class="p-4 mb-4 text-sm text-center w-1/4 text-white rounded-lg bg-red-400 dark:bg-gray-800 dark:text-red-400" role="alert">
+                <span class="font-medium">Error!!!</span> {{session('error')}}
+            </div>
+        </div>
+        @endif
         <form action="{{ route('actionpinjam') }}" method="post">
             @csrf
             <x-field nama="Nama Peminjam" id="peminjam" />

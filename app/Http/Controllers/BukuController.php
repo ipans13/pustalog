@@ -106,30 +106,35 @@ class BukuController extends Controller
         if (Buku::where('id_referensi', $request->id_referensi)->exists()) {
             peminjaman::create([
                 'nama' => $request->peminjam,
-                'buku' => $request->id_referensi,
+                'id_referensi' => $request->id_referensi,
                 'token' => $request->token,
                 'waktu_pinjam' => date(now()),
             ]);
-            return redirect()->route('peminjaman')->with('success', 'Peminjaman Berhasil');
+            return redirect()->route('peminjaman')->with('success', 'Peminjaman Berhasil token anda adalah: ' . $request->token);
         }else{
             return redirect()->route('peminjaman')->with('error', 'ID Referensi tidak ditemukan');
         }
-
-           }
+        
+       }
     public function kembali(Request $request)
     {
+        // Validate the incoming request to ensure 'token' is present
         $request->validate([
             'token' => 'required',
         ]);
 
+        // Attempt to find the peminjaman record using the provided token
         $pinjam_buku = peminjaman::where('token', $request->token)->first();
 
         if ($pinjam_buku) {
+            // Update the waktu_kembali field with the current timestamp
             $pinjam_buku->waktu_kembali = now();
             $pinjam_buku->save();
 
+            // Redirect to the peminjaman route with a success message
             return redirect()->route('peminjaman')->with('successkembali', 'Buku berhasil dikembalikan');
         } else {
+            // Redirect back with an error message if the record is not found
             return redirect()->back()->with('error', 'Token tidak ditemukan atau sudah tidak valid');
         }
     }
