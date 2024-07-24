@@ -77,12 +77,12 @@ class AdminController extends Controller
         $laporan = DB::table('laporan_msk_keluar')
         ->whereMonth('created_at', date('m'))
         ->whereYear('created_at', date('Y'))
-        ->get();
+        ->paginate(5);
 
         $meminjam = DB::table('peminjaman')
         ->whereMonth('waktu_pinjam', date('m'))
         ->whereYear('waktu_pinjam', date('Y'))
-        ->get();
+        ->paginate(5);
         $laporanbulan[] = [
             'bulan' => date('n'),
             'tahun' => date('Y')
@@ -116,12 +116,12 @@ class AdminController extends Controller
         $laporan_bulanan = DB::table('laporan_msk_keluar')
         ->whereMonth('created_at', $month_choose)
         ->whereYear('created_at', $year_choose)
-        ->get();
+        ->paginate(5);
 
         $meminjam = DB::table('peminjaman')
         ->whereMonth('waktu_pinjam',$month_choose)
         ->whereYear('waktu_pinjam', $year_choose)
-        ->get();
+        ->paginate(5);
         $laporanbulan[] = [
             'bulan' => $month_choose,
             'tahun' => $year_choose

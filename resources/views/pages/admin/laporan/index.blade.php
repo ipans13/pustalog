@@ -53,7 +53,7 @@
                 </td>
             </tr>
             @endforeach
-
+            {{ $laporans->links() }}
         </tbody>
     </table>
 
@@ -103,6 +103,7 @@
                 </td>
             </tr>
             @endforeach
+            {{ $meminjams->links() }}
 
         </tbody>
     </table>
