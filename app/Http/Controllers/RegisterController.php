@@ -9,11 +9,13 @@ use Illuminate\Support\Facades\Session;
 
 class RegisterController extends Controller
 {
-    public function Register(){
+    public function Register()
+    {
         return view('auth.register');
     }
 
-    public function actionregister (Request $request){
+    public function actionregister(Request $request)
+    {
         $user = User::Create([
             'email' => $request->email,
             'name' => $request->name,
