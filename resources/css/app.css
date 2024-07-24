@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.floating-label {
+    position: relative;
+}
+.floating-label input:focus + label,
+.floating-label input:not(:placeholder-shown) + label {
+    top: -1rem;
+    left: 0.75rem;
+    font-size: 0.75rem;
+    color: #1a202c; /* text-gray-900 */
+}
+.floating-label label {
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    transform: translateY(-50%);
+    background: white;
+    padding: 0 0.25rem;
+    transition: all 0.2s ease-in-out;
+    color: #a0aec0; /* text-gray-400 */
+}
